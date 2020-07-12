@@ -27,7 +27,7 @@ steps:
   displayName: Pull
 
 - script: 
-   git pull https://$(UserName):$(GitHubPAT)@github.com/yth01/TMI.git -u --all
+   git push https://$(UserName):$(GitHubPAT)@github.com/yth01/TMI.git -u --all
 
   displayName: Push
 
