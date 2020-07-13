@@ -54,20 +54,26 @@ def jobkorea_lv1(pages: int):
     
     for page in range(pages):
         url = url_base + str(page + 1)
-        html = urlopen(url)
-        soup = BeautifulSoup(html, "lxml")
         
-        i = 0
-        while True:
-            try:
-                company.append(soup.findAll("span", attrs={"class": "titTx"})[i].text)
-                career.append(soup.findAll("span", attrs={"class": "career"})[i].text)
-                field1.append(soup.findAll("span", attrs={"class": "field"})[::2][i].text)
-                field2.append(soup.findAll("span", attrs={"class": "field"})[1::2][i].text)
-                urls.append("www.jobkorea.co.kr" + soup.findAll("ul", attrs={"class": "selfLists"})[0].findAll("li")[i].find("a")["href"])
-                i += 1
-            except:
-                break
+        try:
+            html = urlopen(url)
+            soup = BeautifulSoup(html, "lxml")
+            
+            i = 0
+            while True:
+                try:
+                    company.append(soup.findAll("span", attrs={"class": "titTx"})[i].text)
+                    career.append(soup.findAll("span", attrs={"class": "career"})[i].text)
+                    field1.append(soup.findAll("span", attrs={"class": "field"})[::2][i].text)
+                    field2.append(soup.findAll("span", attrs={"class": "field"})[1::2][i].text)
+                    urls.append("www.jobkorea.co.kr" + soup.findAll("ul", attrs={"class": "selfLists"})[0].findAll("li")[i].find("a")["href"])
+                    
+                    i += 1
+                    
+                except:
+                    break
+        except:
+            break
                 
     return pd.DataFrame({"회사명": company,
                          "지원시기": career,
