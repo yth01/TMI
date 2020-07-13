@@ -19,17 +19,17 @@ def saramin_lv1(pages: int):
     assert pages > 0
     
     url_base = "http://www.saramin.co.kr/zf_user/public-recruit/coverletter-list/page/"
-    
     result = pd.DataFrame()
+    
     for page in range(pages):
         url = url_base + str(page + 1)
-        
-        table = pd.read_html(url)[0]
-        html = urlopen(url)
-        soup = BeautifulSoup(html, "lxml")
-        
         urls = []
+        
         try:
+            html = urlopen(url)
+            soup = BeautifulSoup(html, "lxml")
+            table = pd.read_html(url)[0]
+            
             for i in range(table.shape[0]):
                 urls.append("www.saramin.co.kr" + soup.findAll("td", attrs={"class": "td_apply_subject"})[i].find("a")["href"])
         
