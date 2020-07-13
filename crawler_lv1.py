@@ -29,12 +29,13 @@ def saramin_lv1(pages: int):
         soup = BeautifulSoup(html, "lxml")
         
         urls = []
-        for i in range(table.shape[0]):
-            urls.append("www.saramin.co.kr" + soup.findAll("td", attrs={"class": "td_apply_subject"})[i].find("a")["href"])
-        
         try:
+            for i in range(table.shape[0]):
+                urls.append("www.saramin.co.kr" + soup.findAll("td", attrs={"class": "td_apply_subject"})[i].find("a")["href"])
+        
             table["주소"] = urls
             result = result.append(table)
+            
         except:
             continue
         
