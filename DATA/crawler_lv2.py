@@ -59,7 +59,7 @@ def jobkorea_lv2(file_path=r"C:\Users\parksinsik\Desktop\박신식\Github\TMI\jo
             
             speclists = soup.findAll("ul", attrs={"class": "specLists"})[0].text
             grade = soup.findAll("span", attrs={"class": "grade"})[0].text
-            total_advice = soup.findAll("p", attrs={"class": "tx"})[1].text
+            total_advice = soup.findAll("div", attrs={"class": "adviceTotal"})[0].findAll("p", attrs={"class": "tx"})[0].text
             questions = list(map(lambda x: x.text, soup.findAll("dl", attrs={"class": "qnaLists"})[0].findAll("span", attrs={"class": "tx"})))
             answers = list(map(lambda x: x.text, soup.findAll("dl", attrs={"class": "qnaLists"})[0].findAll("div", attrs={"class": "tx"})))
             
