@@ -65,8 +65,8 @@ def jobkorea_lv2(file_path=r"C:\Users\parksinsik\Desktop\박신식\Github\TMI\jo
             
             advices = soup.findAll("dd", attrs={"class": "show"})
             advices = list(map(lambda x: x.findAll("div", attrs={"class": "advice"})[0].text, advices))
-            for i in range(len(answers) - len(advices)):
-                advice = soup.findAll("dd", attrs={"class": ""})[-(i+1)].findAll("div", attrs={"class": "advice"})[0].text
+            for j in range(len(answers) - len(advices)):
+                advice = soup.findAll("dd", attrs={"class": ""})[-(j+1)].findAll("div", attrs={"class": "advice"})[0].text
                 advices.append(advice)
                 
             temp = pd.DataFrame({"질문": questions, "답변": answers, "조언": advices})
