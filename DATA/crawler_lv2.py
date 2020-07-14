@@ -20,7 +20,7 @@ def saramin_lv2(file_path=r"C:\Users\parksinsik\Desktop\박신식\Github\TMI\sar
     result = pd.DataFrame()
     
     for i in range(saramin_lv1.shape[0]):
-        url = "http://" + saramin_lv1.loc[i, url_column]
+        url = saramin_lv1.loc[i, url_column]
         
         try:
             html = urlopen(url)
@@ -51,7 +51,7 @@ def jobkorea_lv2(file_path=r"C:\Users\parksinsik\Desktop\박신식\Github\TMI\jo
     result = pd.DataFrame()
     
     for i in range(jobkorea_lv1.shape[0]):
-        url = "http://" + jobkorea_lv1.loc[i, url_column]
+        url = jobkorea_lv1.loc[i, url_column]
         
         try:
             html = urlopen(url)
