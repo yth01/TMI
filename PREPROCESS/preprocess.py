@@ -7,7 +7,7 @@
 import pandas as pd
 import re
 from datetime import datetime
-#from soyspacing.countbase import CountSpace
+from soyspacing.countbase import CountSpace
 
 
 # In[ ]:
