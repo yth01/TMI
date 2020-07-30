@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 
-data = pd.read_csv("./jobkorea_all.csv")
+data = pd.read_csv("/content/drive/My Drive/TMI/jobkorea_all.csv")
 
 def substitute_patterns(text):
     assert type(text) is pd.core.series.Series
@@ -15,7 +15,7 @@ def substitute_patterns(text):
         # ".": "",
         "아쉬운점\s*\d*": " ",
         "좋은점\s*\d*": " ",
-        "글자수\s*\d*자\d*byte": " ",
+        "글자수\s*\d*자\d*,\d*byte": " ",
         "o{2,}": " "
     }
 
