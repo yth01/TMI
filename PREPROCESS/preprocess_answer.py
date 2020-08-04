@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import re
 
-data = pd.read_csv("./jobkorea_all.csv")
+df = pd.read_csv("./jobkorea_all.csv")
 
 df_drop = df.columns[2:]
 df = df.drop(df_drop, axis=1)
