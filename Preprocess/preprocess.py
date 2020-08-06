@@ -114,10 +114,9 @@ def _preprocess_qna(data):
     data = _split_title(data)
     data["답변"] = _re_sub(data["답변"], patterns={
         "[\s]": " ",
-        "[.]{2,}": " ",
-        ",": "",
-        ".": "",
-        "o{2,}": " "
+        "[.]": " ",
+        "[,]": " ",
+        "o{3,}": " "
     })
     
     return data
