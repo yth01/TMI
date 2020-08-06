@@ -119,6 +119,7 @@ def _preprocess_qna(data):
         "[,]": " ",
         "o{3,}": " "
     })
+    data["답변"] = _filt_and_trim(data["답변"])
     
     return data
 
