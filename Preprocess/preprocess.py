@@ -112,6 +112,7 @@ def _preprocess_qna(data):
     assert isinstance(data, pd.core.frame.DataFrame)
     
     data = _split_title(data)
+    data["답변"] = data["답변"].str.lower()
     data["답변"] = _re_sub(data["답변"], patterns={
         "[\s]": " ",
         "[.]": " ",
