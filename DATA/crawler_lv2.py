@@ -20,6 +20,8 @@ def saramin_lv2(file_path=r"C:\Users\parksinsik\Desktop\박신식\Github\TMI\sar
     result = pd.DataFrame()
     
     for i in range(saramin_lv1.shape[0]):
+        # .loc메소드는 레이블을 이용하여 행에 접근하는 메소드
+        # 인덱스와 column을 이용하여 참조
         url = saramin_lv1.loc[i, url_column]
         
         try:

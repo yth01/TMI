@@ -16,29 +16,38 @@ from bs4 import BeautifulSoup
 
 def saramin_lv1(pages: int):
     
+    # pages가 양수가 아니라면 FALSE를 반환하고 오류 발생
     assert pages > 0
     
     url_base = "http://www.saramin.co.kr/zf_user/public-recruit/coverletter-list/page/"
     result = pd.DataFrame()
     
+    # 페이지 수 만큼 반복
     for page in range(pages):
+        # url에 url_base에 현재 페이지에 1을 더하여 대입
         url = url_base + str(page + 1)
         
         try:
+            # 값을 읽는다.
             html = urlopen(url)
             soup = BeautifulSoup(html, "lxml")
             table = pd.read_html(url)[0]
             
+            # findall(정규 표현식 패턴, 텍스트)	텍스트에서 정규 표현식 패턴에 해당하는 값을 찾아서 리스트로 반환
+            # class가 td_apply_subject인 속성을 지정하여 td패턴에 해당하는 값을 찾아서 리스트로 변환
             urls = soup.findAll("td", attrs={"class": "td_apply_subject"})
+            # map함수가 받은 인자는 "http://www.saramin.co.kr" + x.find("a")["href"]이고 받은 리스트는 urls이다.
+            # urls에서 링크를 저장한다.
             urls = list(map(lambda x: "http://www.saramin.co.kr" + x.find("a")["href"], urls))
             
             table["주소"] = urls
+            # 열에 값을 추가
             result = result.append(table)
             
         except:
             continue
         
-    return result.reset_index(drop=True)
+    return result.reset_index(drop=True) # 새로운 행으로 이동
 
 
 def jobkorea_lv1(pages: int):
@@ -55,13 +64,19 @@ def jobkorea_lv1(pages: int):
             html = urlopen(url)
             soup = BeautifulSoup(html, "lxml")
             
+            # map함수가 받은 인자는 x.text이고 받은 리스트는 company이다.
             company = soup.findAll("span", attrs={"class": "titTx"})
             company = list(map(lambda x: x.text, company))
+            # map함수가 받은 인자는 x.text이고 받은 리스트는 career이다.
             career = soup.findAll("span", attrs={"class": "career"})
             career = list(map(lambda x: x.text, career))
+
             field = soup.findAll("span", attrs={"class": "field"})
+            # map함수가 받은 인자는 x.text이고 받은 리스트는 근무형태를 포함하는 field[::2]이다.
             field1 = list(map(lambda x: x.text, field[::2]))
+            # map함수가 받은 인자는 x.text이고 받은 리스트는 직무분야를 포함하는 field[1::2]이다.
             field2 = list(map(lambda x: x.text, field[1::2]))
+
             urls = soup.findAll("ul", attrs={"class": "selfLists"})[0].findAll("li")
             urls = list(map(lambda x: "http://www.jobkorea.co.kr" + x.find("a")["href"], urls))
             
